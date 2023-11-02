@@ -1,0 +1,135 @@
+[gd_scene load_steps=15 format=3 uid="uid://d1vk7448nh04j"]
+
+[ext_resource type="Texture2D" uid="uid://beqqhj4clwebf" path="res://icon.svg" id="1_dqura"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igm8q"]
+atlas = ExtResource("1_dqura")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sro3f"]
+atlas = ExtResource("1_dqura")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl2by"]
+atlas = ExtResource("1_dqura")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7c1i"]
+atlas = ExtResource("1_dqura")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3xem"]
+atlas = ExtResource("1_dqura")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mr7m"]
+atlas = ExtResource("1_dqura")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdlfn"]
+atlas = ExtResource("1_dqura")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usa0w"]
+atlas = ExtResource("1_dqura")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k4qif"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igm8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sro3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl2by")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7c1i")
+}],
+"loop": true,
+"name": &"anim1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3xem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mr7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdlfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usa0w")
+}],
+"loop": true,
+"name": &"anim2",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_wb5ex"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"anim1"]
+}
+
+[sub_resource type="Animation" id="Animation_oudkr"]
+resource_name = "anim1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"anim1"]
+}
+
+[sub_resource type="Animation" id="Animation_a6nhw"]
+resource_name = "anim2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"anim2"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tah50"]
+_data = {
+"RESET": SubResource("Animation_wb5ex"),
+"anim1": SubResource("Animation_oudkr"),
+"anim2": SubResource("Animation_a6nhw")
+}
+
+[node name="Player" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k4qif")
+animation = &"anim2"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tah50")
+}
